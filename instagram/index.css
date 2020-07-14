@@ -1,0 +1,202 @@
+body {
+  box-sizing: border-box;
+  color: #262626;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  background: #fafafa;
+}
+em {
+  font-style: normal;
+}
+p {
+  margin: 0;
+}
+img {
+  display: block;
+}
+.feed {
+  width: 614px;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  background: #fff;
+}
+a {
+  color: #262626;
+}
+a,
+a:hover,
+a:active {
+  text-decoration: none;
+  outline: none;
+}
+button,
+input {
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+button {
+  cursor: pointer;
+}
+/* feed__header */
+.feed__header {
+  padding: 16px;
+  font-size: 0;
+}
+.header__account-info {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 24px);
+  font-size: 14px;
+}
+.user__thumb {
+  display: inline-block;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  margin-right: 15px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.user__thumb img {
+  width: 100%;
+}
+.user__id {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.header__actions {
+  width: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* feed__images */
+.feed__images {
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+}
+.feed__images img {
+  width: 100%;
+}
+
+/* feed__icons */
+.feed__icons {
+  padding: 0 16px;
+  height: 40px;
+  font-size: 0;
+  margin-top: 4px;
+}
+.icons__left {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 40px);
+}
+.icons__left button {
+  width: 40px;
+  height: 40px;
+}
+.icons__right {
+  display: inline-block;
+  vertical-align: middle;
+  width: 40px;
+}
+.icons__right button {
+  width: 40px;
+  height: 40px;
+}
+
+/* feed__likes */
+.feed__likes {
+  padding: 0 16px;
+  margin-bottom: 8px;
+}
+.feed__likes .likes__text {
+  font-weight: bold;
+}
+
+/* feed__text */
+.feed__text {
+  padding: 0 16px;
+  margin-bottom: 4px;
+}
+
+/* feed__view-comments */
+.feed__view-comments {
+  padding: 0 16px;
+}
+.view-comment__all-comment {
+  display: inline-block;
+  color: #8e8e8e;
+  margin-bottom: 4px;
+}
+.comment-list__comment-item {
+  font-size: 0;
+  margin-bottom: 4px;
+}
+.comment-list__comment-item .text {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 12px);
+}
+.comment-list__comment-item .comment-item__like {
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+}
+/* feed__time */
+.feed__time {
+  padding: 0 16px;
+  color: #8e8e8e;
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+
+/* feed__write-comments */
+.feed__write-comments {
+  height: 56px;
+  padding: 0 16px;
+  margin-top: 4px;
+  border-top: 1px solid #dfdfdf;
+  font-size: 0;
+}
+.wirte-comment__input {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 10%);
+  font-size: 14px;
+  line-height: 56px;
+}
+.wirte-comment__input::placeholder {
+  color: rgb(38, 38, 38);
+}
+.wirte-comment__button {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 10%;
+  line-height: 56px;
+  color: #0095f6;
+  opacity: 0.3;
+}
+/* common */
+.text {
+  font-size: 14px;
+}
+
+.text .account__id {
+  font-weight: bold;
+  margin-right: 4px;
+}
