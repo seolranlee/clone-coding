@@ -17,7 +17,7 @@ img {
 }
 .feed {
   width: 614px;
-  margin: 0 auto;
+  margin: 0 auto 60px;
   border-radius: 5px;
   border: 1px solid #dfdfdf;
   background: #fff;
@@ -161,14 +161,13 @@ button {
   padding: 0 16px;
   color: #8e8e8e;
   font-size: 10px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 /* feed__write-comments */
 .feed__write-comments {
   height: 56px;
   padding: 0 16px;
-  margin-top: 4px;
   border-top: 1px solid #dfdfdf;
   font-size: 0;
 }
