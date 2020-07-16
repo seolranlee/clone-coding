@@ -25,15 +25,21 @@ class Feed {
   }
   mounted() {
     if (!this.isDeleted) {
-      document.querySelector(".icon__like").addEventListener("click", () => {
-        this.isLiked = !this.isLiked;
-        this.render();
-      });
+      this.$el
+        .getElementsByClassName("icon__like")[0]
+        .addEventListener("click", () => {
+          this.isLiked = !this.isLiked;
+
+          // this.reRender(this.$likeEl);
+          this.render(this.$el);
+
+          // event가 다 날라가니까 mounted를 해줘야함.
+          this.mounted();
+        });
     }
   }
-  render() {
-    console.log("render");
-    this.$el = `${
+  render(el) {
+    el.innerHTML = `${
       this.isDeleted
         ? ""
         : `<div class="feed">
@@ -209,7 +215,8 @@ class Feed {
     </div>
   </div>`
     }`;
-    return this.$el;
+    this.$el = el;
+    return el;
   }
 }
 const responseDate = {
@@ -251,6 +258,8 @@ const feedList = [];
 
 responseDate.data.forEach((data, index) => {
   feedList.push(new Feed(data));
-  timeLine.innerHTML += feedList[index].render();
+  const element = document.createElement("div");
+  feedList[index].render(element);
+  timeLine.append(element);
   feedList[index].mounted();
 });
