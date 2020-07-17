@@ -7,7 +7,7 @@ class Feed {
     likes,
     text,
     comments,
-    isLiked,
+    // isLiked,
     isDeleted,
     isSaved,
     createdAt
@@ -17,6 +17,7 @@ class Feed {
     this.likes = likes;
     this.text = text;
     this.comments = comments;
+    // // this.isLiked = isLiked;
     this.isDeleted = isDeleted;
     this.isSaved = isSaved;
 
@@ -27,20 +28,12 @@ class Feed {
     this.$likesEl = null;
 
     this.iconlayer = document.createElement("div");
-    // this.element = document.createElement("div");
-
-    // this.icons = new Icons({
-    //   isLiked: this.isLiked,
-    //   isSaved: this.isSaved
-    // });
     this.icons = {
       like: new Icon({ defaultActive: false })
     };
   }
   mounted() {
     this.icons.like.mounted();
-    console.log("****", this.$el.getElementsByClassName("icon__like")[0]);
-    // this.$el
   }
   render(el) {
     el.innerHTML = `
@@ -235,6 +228,7 @@ const responseDate = {
           comment: "하이 최애 갱얼쥐"
         }
       ],
+      // isLiked: false,
       isDeleted: false,
       isSaved: false,
       createdAt: 3
@@ -271,6 +265,7 @@ const responseDate = {
           comment: "휴지랑 하이랑 만나게 해주고 싶다."
         }
       ],
+      // isLiked: false,
       isDeleted: false,
       isSaved: false,
       createdAt: 17
