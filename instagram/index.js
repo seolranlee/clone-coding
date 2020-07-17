@@ -17,7 +17,6 @@ class Feed {
     this.likes = likes;
     this.text = text;
     this.comments = comments;
-    this.isLiked = isLiked;
     this.isDeleted = isDeleted;
     this.isSaved = isSaved;
 
@@ -236,7 +235,6 @@ const responseDate = {
           comment: "하이 최애 갱얼쥐"
         }
       ],
-      isLiked: false,
       isDeleted: false,
       isSaved: false,
       createdAt: 3
@@ -273,7 +271,6 @@ const responseDate = {
           comment: "휴지랑 하이랑 만나게 해주고 싶다."
         }
       ],
-      isLiked: false,
       isDeleted: false,
       isSaved: false,
       createdAt: 17
