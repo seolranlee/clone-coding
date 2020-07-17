@@ -7,8 +7,8 @@ class Icon extends Component {
    * @param {*} isActive: 아이콘의 활성화 유무.
    * @param {*} images: 아이콘의 활성화 유무에 따라 달라지는 아이콘 이미지 배열. svg 태그와 image url만 받는다.
    */
-  constructor({ isActive, images, uniqueName }) {
-    super({ uniqueName });
+  constructor({ isActive, images, unique }) {
+    super({ unique });
     this.isActive = isActive;
     this.isSvg = [false, false];
     this.images = images;
@@ -26,7 +26,7 @@ class Icon extends Component {
   }
 
   render() {
-    return `<div unique-name=${this.uniqueName}>
+    return `<div unique-name=${this.unique}>
           ${this.isActive ? this._activeIcon() : this._inActiveIcon()}
       </div>`;
   }
