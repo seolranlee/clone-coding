@@ -195,7 +195,9 @@ class Feed {
       </div>
     </div>
     `;
-    el.getElementsByClassName("icon__like")[0].append(this.icons.like.render());
+    el.getElementsByClassName("icon__like")[0].append(
+      this.icons.like.render(this.iconlayer)
+    );
     this.$el = el;
     return el;
   }
