@@ -12,6 +12,13 @@ const like = new Icon({
   unique: "like-icon"
 });
 
+const images = new Images({
+  images: ["./images/img01.jpg", "./images/img02.jpg", "./images/img03.jpg"],
+  unique: "images"
+});
+
 const root = document.getElementById("root");
-root.innerHTML = like.render();
+root.innerHTML += like.render();
+root.innerHTML += images.render();
 like.mounted();
+images.mounted();

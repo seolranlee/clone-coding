@@ -1,0 +1,47 @@
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.images-wrap {
+  width: 614px;
+  height: 614px;
+  overflow: hidden;
+}
+.images-wrap ul {
+}
+.images-wrap img {
+  width: 614px;
+}
+
+.images-wrap ul {
+  font-size: 0;
+  transition: all 0.3s ease-out;
+}
+
+.images-wrap ul li {
+  display: inline-block;
+}
+
+.indicator span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 2px;
+  background: #a8a8a8;
+  border-radius: 50%;
+}
+
+.indicator span.on {
+  background: #0095f6;
+}
+
+.navigation {
+}
+
+.navigation button {
+  width: 30px;
+  height: 30px;
+}
