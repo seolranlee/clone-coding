@@ -151,7 +151,7 @@ class Images extends Component {
 
   _goSlide() {
     this.$el.querySelector(".images").style.transform =
-      "translate3d(" + -(640 * this.count) + "px, 0, 0)";
+      "translate3d(" + -(614 * this.count) + "px, 0, 0)";
   }
 
   _goNext() {
