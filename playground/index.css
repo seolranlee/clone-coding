@@ -5,23 +5,23 @@ li {
   margin: 0;
 }
 
-.images-wrap {
+.images-container {
   width: 614px;
   height: 614px;
   overflow: hidden;
 }
-.images-wrap ul {
+.images-container ul {
 }
-.images-wrap img {
+.images-container img {
   width: 614px;
 }
 
-.images-wrap ul {
+.images-container ul {
   font-size: 0;
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
 }
 
-.images-wrap ul li {
+.images-container ul li {
   display: inline-block;
 }
 

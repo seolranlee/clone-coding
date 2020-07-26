@@ -17,8 +17,15 @@ const images = new Images({
   unique: "images"
 });
 
+const images2 = new Images({
+  images: ["./images/img01.jpg", "./images/img03.jpg"],
+  unique: "images2"
+});
+
 const root = document.getElementById("root");
 root.innerHTML += like.render();
 root.innerHTML += images.render();
+root.innerHTML += images2.render();
 like.mounted();
 images.mounted();
+images2.mounted();
