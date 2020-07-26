@@ -6,8 +6,8 @@
 class Component {
   /**
    * 생성자 함수.
-   * @param {*} unique: 각 컴포넌트에서 선택을 위해 유니크하게 쓰이는 unique
-   * @description: 인스턴스를 만들때 받아오는 unique을 연결시켜준다.
+   * @param {*} unique: 각 컴포넌트 안의 요소들을 선택하기 위해 유니크하게 쓰이는 unique name. 중복되어선 안된다.
+   * @description: 인스턴스를 만들때 unique name을 받아 컴포넌트와 DOM을 매칭시켜준다.
    */
   constructor({ unique }) {
     this.$el = null;
@@ -83,7 +83,7 @@ class Icon extends Component {
 class Images extends Component {
   /**
    * 생성자 함수.
-   * @param {*} images: 이미지 배열(여러개 일 경우 슬라이더로)
+   * @param {*} images: 이미지 배열(여러개 일 경우 슬라이더로 구현된다)
    */
   constructor({ images, unique }) {
     super({ unique });

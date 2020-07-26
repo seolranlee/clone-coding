@@ -18,7 +18,7 @@ const images = new Images({
 });
 
 const images2 = new Images({
-  images: ["./images/img01.jpg", "./images/img03.jpg"],
+  images: ["./images/img01.jpg"],
   unique: "images2"
 });
 
