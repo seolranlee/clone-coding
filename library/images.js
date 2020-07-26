@@ -4,7 +4,7 @@
 class Images extends Component {
   /**
    * 생성자 함수.
-   * @param {*} images: 이미지 배열(여러개 일 경우 슬라이더로)
+   * @param {*} images: 이미지 배열(여러개 일 경우 슬라이더로 구현된다)
    */
   constructor({ images, unique }) {
     super({ unique });
@@ -20,16 +20,17 @@ class Images extends Component {
     if (this.images.length > 1) {
       this._indicator();
       this._navigation();
-
-      this.$el.querySelector(".navPrev").addEventListener("click", () => {
-        this._goPrev();
-        // alert(".navPrev");
-      });
-      this.$el.querySelector(".navNext").addEventListener("click", () => {
-        this._goNext();
-        // alert(".navNext");
-      });
+      this._addEvent();
     }
+  }
+
+  _addEvent() {
+    this.$el.querySelector(".navPrev").addEventListener("click", () => {
+      this._goPrev();
+    });
+    this.$el.querySelector(".navNext").addEventListener("click", () => {
+      this._goNext();
+    });
   }
 
   _images() {
@@ -63,6 +64,15 @@ class Images extends Component {
     this.$el.append(indicatorLayer);
   }
 
+  _indicatorRerender() {
+    this.$el.querySelector(".indicator").innerHTML = "";
+    this.images.forEach((image, index) => {
+      this.$el.querySelector(".indicator").innerHTML += `<span class="${
+        this.count === index ? "bullet on" : "bullet"
+      }"></span>`;
+    });
+  }
+
   _navigation() {
     const navigationLayer = document.createElement("ul");
     navigationLayer.classList.add("navigation");
@@ -87,12 +97,7 @@ class Images extends Component {
       console.log(this.count);
 
       // indicator
-      this.$el.querySelector(".indicator").innerHTML = "";
-      this.images.forEach((image, index) => {
-        this.$el.querySelector(".indicator").innerHTML += `<span class="${
-          this.count === index ? "bullet on" : "bullet"
-        }"></span>`;
-      });
+      this._indicatorRerender();
     } else return;
   }
 
@@ -104,12 +109,7 @@ class Images extends Component {
       console.log(this.count);
 
       // indicator
-      this.$el.querySelector(".indicator").innerHTML = "";
-      this.images.forEach((image, index) => {
-        this.$el.querySelector(".indicator").innerHTML += `<span class="${
-          this.count === index ? "bullet on" : "bullet"
-        }"></span>`;
-      });
+      this._indicatorRerender();
     } else return;
   }
 
