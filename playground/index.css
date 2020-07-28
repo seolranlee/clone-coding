@@ -5,23 +5,23 @@ li {
   margin: 0;
 }
 
-.images-container {
+.item-container, .slider-container {
   width: 614px;
   height: 614px;
   overflow: hidden;
 }
-.images-container ul {
+.slider-container ul {
 }
-.images-container img {
+.item-container img, .slider-container img {
   width: 614px;
 }
 
-.images-container ul {
+.slider-container ul {
   font-size: 0;
   transition: all 0.2s ease-out;
 }
 
-.images-container ul li {
+.slider-container ul li {
   display: inline-block;
 }
 

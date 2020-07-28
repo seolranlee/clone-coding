@@ -12,20 +12,24 @@ const like = new Icon({
   unique: "like-icon"
 });
 
-const images = new Images({
-  images: ["./images/img01.jpg", "./images/img02.jpg", "./images/img03.jpg"],
-  unique: "images"
-});
 
-const images2 = new Images({
-  images: ["./images/img01.jpg"],
-  unique: "images2"
-});
+var object = null
+// var arr = ["./images/img01.jpg"]
+var arr = ["./images/img01.jpg", "./images/img02.jpg", "./images/img03.jpg"]
+if(!object) {
+  if(arr.length > 1) object = new ImageSlider({
+    unique: "image-slider",
+    item: arr
+  })
+  else object = new Image({
+    unique: "image",
+    item: arr[0]
+  })
+}
 
 const root = document.getElementById("root");
 root.innerHTML += like.render();
-root.innerHTML += images.render();
-root.innerHTML += images2.render();
+root.innerHTML += object.render();
+
 like.mounted();
-images.mounted();
-images2.mounted();
+object.mounted();
