@@ -76,8 +76,21 @@ class Icon extends Component {
   destroy() {}
 }
 
+
+/**
+ * @description 인스타그램 슬라이드 영역 컴포넌트를 구현하기 위한 라이브러리.
+ */
+
 // multi
 class Slider extends Component {
+
+  /**
+   * 생성자 함수.
+   * @param {*} unique: 각 컴포넌트 안의 요소들을 선택하기 위해 유니크하게 쓰이는 unique name. 중복되어선 안된다.
+   * @param {*} item: 슬라이드를 생성하기 위해 받아오는 아이템들(타입은 확장 가능)
+   * @description: 인스턴스를 만들때 unique name을 받아 컴포넌트와 DOM을 매칭시켜준다.
+   */
+
   constructor({ unique, item }){
     super({ unique })
     this.item = item
@@ -137,7 +150,19 @@ class Slider extends Component {
   }
 }
 
+/**
+ * @description 받아오는 아이템의 형식이 복수의 이미지 일 때 이를 슬라이더로 구현하기 위한 라이브러리.
+ */
+
 class ImageSlider extends Slider {
+
+  /**
+   * 생성자 함수.
+   * @param {*} unique: 각 컴포넌트 안의 요소들을 선택하기 위해 유니크하게 쓰이는 unique name. 중복되어선 안된다.
+   * @param {*} item: 슬라이드를 생성하기 위해 받아오는 아이템들(타입은 확장 가능)
+   * @description: 인스턴스를 만들때 unique name을 받아 컴포넌트와 DOM을 매칭시켜준다.
+   */
+
   constructor({ unique, item }){
     super({ unique, item })
   }
@@ -154,31 +179,78 @@ class ImageSlider extends Slider {
   }
 }
 
+
+/**
+ * @description 받아오는 아이템이 하나일 때 이를 item-container로 감싸기 위해 구현된 라이브러리.
+ */
+
 // single
-class Item extends Component {
+// class Item extends Component {
+//   constructor({ unique, item }){
+//     super({ unique })
+//     this.item = item
+//   }
+//   mounted(){
+//     super.mounted()
+//   }
+//   render(children) {
+//     return `
+//       <div unique-name=${this.unique}>
+//         <div class="item-container">
+//           ${children}
+//         </div>
+//       </div>
+//     `
+//   }
+// }
+
+// class Image extends Item {
+//   constructor({ unique, item }){
+//     super({ unique, item })
+//   }
+//   render(){
+//     return super.render(`<img src=${this.item}>`)
+//   }
+// }
+
+class Image extends Component {
   constructor({ unique, item }){
     super({ unique })
+
     this.item = item
   }
   mounted(){
     super.mounted()
   }
-  render(children) {
+  render(){
     return `
       <div unique-name=${this.unique}>
         <div class="item-container">
-          ${children}
+          <img src="${this.item}" alt="image">
         </div>
       </div>
     `
   }
 }
 
-class Image extends Item {
+class Video extends Component {
   constructor({ unique, item }){
-    super({ unique, item })
+    super({ unique })
+
+    this.item = item
+  }
+  mounted(){
+    super.mounted()
   }
   render(){
-    return super.render(`<img src=${this.item}>`)
+    return `
+      <div unique-name=${this.unique}>
+        <div class="item-container">
+          <video class="video-wrapper" muted playsinline autoplay>
+            <source type="video/mp4" src="${this.item}">
+          </video>
+        </div>
+      </div>
+    `
   }
 }

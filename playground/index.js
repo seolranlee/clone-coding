@@ -15,17 +15,19 @@ const like = new Icon({
 
 var object = null
 // var arr = ["./images/img01.jpg"]
-var arr = ["./images/img01.jpg", "./images/img02.jpg", "./images/img03.jpg"]
+var arr = ["http://ssd.designfever.com/kr/contents/galaxy-s10/video/kv_video.mp4"]
 if(!object) {
   if(arr.length > 1) object = new ImageSlider({
     unique: "image-slider",
     item: arr
   })
-  else object = new Image({
-    unique: "image",
+  else object = new Video({
+    unique: "video",
     item: arr[0]
   })
 }
+
+
 
 const root = document.getElementById("root");
 root.innerHTML += like.render();

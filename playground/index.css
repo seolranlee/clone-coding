@@ -12,7 +12,7 @@ li {
 }
 .slider-container ul {
 }
-.item-container img, .slider-container img {
+.item-container *, .slider-container * {
   width: 614px;
 }
 
