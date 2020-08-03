@@ -36,6 +36,9 @@ class Feed {
         this.dots = new Indicator({
           count: arr.length
         });
+        this.nav = new Navigation({
+          count: arr.length
+        })
       }
       else {
         this.views = new Image({
@@ -66,11 +69,14 @@ class Feed {
   mounted() {
     this.views.mounted();
     if(this.dots !== undefined) this.dots.mounted();
+    if(this.nav !== undefined) this.nav.mounted();
     this.like.mounted();
     this.saved.mounted();
-    this.views.onSliderEffect(count => {
+    this.nav.onSliderEffect(count => {
+      this.views.goSlide(count)
       this.dots.moveTo(count);
     });
+    
   }
   render(el) {
     el.innerHTML = `
@@ -87,6 +93,7 @@ class Feed {
       </div>
       <div class="feed__images">
         ${this.views.render()}
+        ${this.nav ? this.nav.render() : ""}
       </div>
       <div class="feed__icons">
         <div class="icons__left">

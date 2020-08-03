@@ -44,6 +44,10 @@ li {
   height: 30px;
 }
 
+.navigation button.hide{
+  visibility: hidden;
+}
+
 .icon {
   animation: grow-up 0.2s;
 }

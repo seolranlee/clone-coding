@@ -52,10 +52,10 @@ class Icon extends Component {
 
   mounted() {
     super.mounted()
-    this._addEvent()
+    this.addEvent()
   }
 
-  _addEvent() {
+  addEvent() {
     this.$el.addEventListener("click", () => {
       this.isActive = !this.isActive
       this.$el.outerHTML = this.render()
@@ -63,13 +63,13 @@ class Icon extends Component {
     })
   }
 
-  _inActiveIcon() {
+  inActiveIcon() {
     return this.isSvg
       ? this.images[0]
       : `<img src="${this.images[0]}" />`
   }
 
-  _activeIcon() {
+  activeIcon() {
     return this.isSvg
       ? this.images[1]
       : `<img src="${this.images[1]}" />`
@@ -78,7 +78,7 @@ class Icon extends Component {
   render() {
     console.log(this.isSvg)
     return `<div unique-name=${this.unique} class="${this.isActive? "icon active" : "icon"}">
-        ${this.isActive ? this._activeIcon() : this._inActiveIcon()}
+        ${this.isActive ? this.activeIcon() : this.inActiveIcon()}
     </div>`
   }
   destroy() {}
@@ -109,19 +109,10 @@ class Slider extends Component {
   }
   mounted() {
     super.mounted()
-    this.addEvent()
   }
-  navigation() {
-    return `
-      <ul class="navigation">
-        <button class="navPrev"> < </button>
-        <button class="navNext"> > </button>
-      </ul>
-    `
-  }
-  goSlide() {
+  goSlide(count) {
     this.$el.querySelector(".slides-wrapper").style.transform =
-      "translate3d(" + -(614 * this.count) + "px, 0, 0)"
+      "translate3d(" + -(614 * count) + "px, 0, 0)"
   }
   goNext() {
     if (this.count < this.item.length - 1) {
@@ -142,21 +133,13 @@ class Slider extends Component {
       if (this.eventListener !== null) this.eventListener(this.count)
     }
   }
-  addEvent() {
-    this.$el.querySelector(".navPrev").addEventListener("click", () => {
-      this.goPrev()
-    })
-    this.$el.querySelector(".navNext").addEventListener("click", () => {
-      this.goNext()
-    })
-  }
+  
   render(children) {
     return `
       <div class="slider" unique-name=${this.unique}>
         <div class="slider-container">
           ${children}
         </div>
-        ${this.navigation()}
       </div>
     `
   }
@@ -283,5 +266,51 @@ class Indicator extends Component {
     this.mounted()
     console.log(this.$el)
     console.log(index + "를 받았습니다!")
+  }
+}
+
+let navigationName = `navigation-${Math.round(Math.random() * 100000000)}`
+let navigationIdx = 0
+
+class Navigation extends Component {
+  constructor({ count }) {
+    super({ unique: navigationName + ++navigationIdx })
+
+    this.count = count
+
+    this.index = 0
+    
+    this.eventListener = null
+  }
+  mounted() {
+    super.mounted()
+    this.addEvent()
+  }
+  addEvent(){
+    this.$el.querySelector(".navPrev").addEventListener("click", () => {
+      if (this.eventListener !== null && this.index > 0) this.eventListener(--this.index)
+      this.reRender()
+    })
+    this.$el.querySelector(".navNext").addEventListener("click", () => {
+      if (this.eventListener !== null && this.index < this.count - 1) this.eventListener(++this.index)
+      this.reRender()
+    })
+  }
+  render() {
+    return `
+      <ul class="navigation" unique-name="${this.unique}">
+        <button class="${this.index === 0 ? "navPrev hide" : "navPrev"}"> &lt; </button>
+        <button class="${this.index === this.count - 1 ? "navNext hide" : "navNext"}"> &gt; </button>
+      </ul>
+    `
+  }
+  onSliderEffect(listener = count => {}) {
+    this.eventListener = listener
+  }
+
+  reRender() {
+    // this.index = index
+    this.$el.outerHTML = this.render()
+    this.mounted()
   }
 }
