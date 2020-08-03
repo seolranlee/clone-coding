@@ -29,19 +29,6 @@ li {
   display: inline-block;
 }
 
-.indicator span {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin: 0 4px;
-  background: #a8a8a8;
-  border-radius: 50%;
-}
-
-.indicator span.on {
-  background: #0095f6;
-}
-
 .navigation {
   position: absolute;
   display: flex;
@@ -82,5 +69,9 @@ li {
   height: 8px;
   margin: 0 2px;
   border-radius: 50%;
-  background-color: gray;
+  background-color: #a8a8a8;
+}
+
+.indicator-dot.active{
+  background-color: #0095f6;
 }

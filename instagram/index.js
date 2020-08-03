@@ -68,6 +68,9 @@ class Feed {
     if(this.dots !== undefined) this.dots.mounted();
     this.like.mounted();
     this.saved.mounted();
+    this.views.onSliderEffect(count => {
+      this.dots.moveTo(count);
+    });
   }
   render(el) {
     el.innerHTML = `
