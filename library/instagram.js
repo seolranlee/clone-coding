@@ -30,14 +30,18 @@ class Component {
 /**
  * @description 인스타그램 안에 쓰이는 좋아요나 저장 기능의 아이콘 상태변화를 토글하기 위해 만든 라이브러리.
  */
+
+let iconName = `icon-${Math.round(Math.random() * 100000000)}`;
+let iconIdx = 0;
+
 class Icon extends Component {
   /**
    * 생성자 함수.
    * @param {*} isActive: 아이콘의 활성화 유무.
    * @param {*} images: 아이콘의 활성화 유무에 따라 달라지는 아이콘 이미지 배열. svg 태그와 image url만 받는다.
    */
-  constructor({ isActive, images, unique }) {
-    super({ unique });
+  constructor({ isActive, images }) {
+    super({ unique: iconName + ++iconIdx });
     this.isActive = isActive;
     this.isSvg = [false, false];
     this.images = images;
@@ -60,30 +64,35 @@ class Icon extends Component {
   }
 
   _inActiveIcon() {
-    return this.isSvg[0] ? this.images[0] : `<img src="${this.images[0]}" />`;
+    return this.isSvg
+      ? this.images[0]
+      : `<img src="${this.images[0]}" />`;
   }
 
   _activeIcon() {
-    return this.isSvg[1] ? this.images[1] : `<img src="${this.images[1]}" />`;
+    return this.isSvg
+      ? this.images[1]
+      : `<img src="${this.images[1]}" />`;
   }
 
   render() {
     console.log(this.isSvg);
-    return `<div unique-name=${this.unique}>
+    return `<div unique-name=${this.unique} class="${this.isActive? "icon active" : "icon"}">
         ${this.isActive ? this._activeIcon() : this._inActiveIcon()}
     </div>`;
   }
   destroy() {}
 }
 
-
 /**
  * @description 인스타그램 슬라이드 영역 컴포넌트를 구현하기 위한 라이브러리.
  */
 
+let sliderName = `slide-${Math.round(Math.random() * 100000000)}`;
+let sliderIdx = 0;
+
 // multi
 class Slider extends Component {
-
   /**
    * 생성자 함수.
    * @param {*} unique: 각 컴포넌트 안의 요소들을 선택하기 위해 유니크하게 쓰이는 unique name. 중복되어선 안된다.
@@ -91,23 +100,24 @@ class Slider extends Component {
    * @description: 인스턴스를 만들때 unique name을 받아 컴포넌트와 DOM을 매칭시켜준다.
    */
 
-  constructor({ unique, item }){
-    super({ unique })
-    this.item = item
+  constructor({ unique, item }) {
+    super({ unique: sliderName + ++sliderIdx });
+    this.item = item;
 
-    this.count = 0
+    this.count = 0;
+    this.eventListener = null;
   }
-  mounted(){
-    super.mounted()
-    this.addEvent()
+  mounted() {
+    super.mounted();
+    this.addEvent();
   }
-  navigation() { 
+  navigation() {
     return `
       <ul class="navigation">
         <button class="navPrev"> < </button>
         <button class="navNext"> > </button>
       </ul>
-    `
+    `;
   }
   goSlide() {
     this.$el.querySelector(".slides-wrapper").style.transform =
@@ -120,6 +130,7 @@ class Slider extends Component {
       // slide
       this.goSlide(this.count);
       console.log(this.count);
+      if (this.eventListener !== null) this.eventListener(this.count);
     }
   }
   goPrev() {
@@ -128,9 +139,10 @@ class Slider extends Component {
       // slide
       this.goSlide(this.count);
       console.log(this.count);
+      if (this.eventListener !== null) this.eventListener(this.count);
     }
   }
-  addEvent(){
+  addEvent() {
     this.$el.querySelector(".navPrev").addEventListener("click", () => {
       this.goPrev();
     });
@@ -138,15 +150,19 @@ class Slider extends Component {
       this.goNext();
     });
   }
-  render(children){
+  render(children) {
     return `
-      <div unique-name=${this.unique}>
+      <div class="slider" unique-name=${this.unique}>
         <div class="slider-container">
           ${children}
         </div>
         ${this.navigation()}
       </div>
-    `
+    `;
+  }
+
+  onSliderEffect(listener = count => {}) {
+    this.eventListener = listener;
   }
 }
 
@@ -155,7 +171,6 @@ class Slider extends Component {
  */
 
 class ImageSlider extends Slider {
-
   /**
    * 생성자 함수.
    * @param {*} unique: 각 컴포넌트 안의 요소들을 선택하기 위해 유니크하게 쓰이는 unique name. 중복되어선 안된다.
@@ -163,22 +178,25 @@ class ImageSlider extends Slider {
    * @description: 인스턴스를 만들때 unique name을 받아 컴포넌트와 DOM을 매칭시켜준다.
    */
 
-  constructor({ unique, item }){
-    super({ unique, item })
+  constructor({ unique, item }) {
+    super({ unique, item });
   }
-  render(){
+  render() {
     return super.render(`
       <ul class="slides-wrapper" style="width:${614 * this.item.length + "px"}">
-        ${this.item.map((image, index)=>{return `
+        ${this.item
+          .map((image, index) => {
+            return `
         <li class="slide-list slide-${index + 1}">
           <img src="${image}" alt="images">
         </li>
-        `}).join("")}
+        `;
+          })
+          .join("")}
       </ul>
-    `)
+    `);
   }
 }
-
 
 /**
  * @description 받아오는 아이템이 하나일 때 이를 item-container로 감싸기 위해 구현된 라이브러리.
@@ -214,35 +232,35 @@ class ImageSlider extends Slider {
 // }
 
 class Image extends Component {
-  constructor({ unique, item }){
-    super({ unique })
+  constructor({ unique, item }) {
+    super({ unique });
 
-    this.item = item
+    this.item = item;
   }
-  mounted(){
-    super.mounted()
+  mounted() {
+    super.mounted();
   }
-  render(){
+  render() {
     return `
       <div unique-name=${this.unique}>
         <div class="item-container">
           <img src="${this.item}" alt="image">
         </div>
       </div>
-    `
+    `;
   }
 }
 
 class Video extends Component {
-  constructor({ unique, item }){
-    super({ unique })
+  constructor({ unique, item }) {
+    super({ unique });
 
-    this.item = item
+    this.item = item;
   }
-  mounted(){
-    super.mounted()
+  mounted() {
+    super.mounted();
   }
-  render(){
+  render() {
     return `
       <div unique-name=${this.unique}>
         <div class="item-container">
@@ -251,6 +269,40 @@ class Video extends Component {
           </video>
         </div>
       </div>
-    `
+    `;
+  }
+}
+
+// 슬라이더의 상태를 해치지 않으면서
+// 슬라이더의 상태를 꺼낼 수 있는 방법
+
+let indicatorName = `indicator-${Math.round(Math.random() * 100000000)}`;
+let indicatorIdx = 0;
+
+class Indicator extends Component {
+  constructor({ count }) {
+    super({ unique: indicatorName + ++indicatorIdx });
+
+    this.count = count;
+    this.indicatorDots = [];
+  }
+  mounted() {}
+  render() {
+    const indicatorArr = [];
+    for (let i = 0; i < this.count; i++) {
+      indicatorArr.push(
+        `<li><span class="indicator-dot" unique-name="${this.unique}-${i}"></span></li>`
+      );
+    }
+
+    return `
+    <ul unique-name="${this.unique}">
+      ${indicatorArr.toString().replace(/,/g, "")}
+    </ul>
+    `;
+  }
+
+  moveTo(index) {
+    console.log(index + "를 받았습니다!");
   }
 }

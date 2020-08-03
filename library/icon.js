@@ -18,11 +18,15 @@ class Icon extends Component {
   }
 
   _inActiveIcon() {
-    return this.isSvg ? this.images[0] : `<img src="${this.images[0]}" />`;
+    return this.isSvg
+      ? `<div class="icon-animation">${this.images[0]}</div>`
+      : `<img class="icon-animation" src="${this.images[0]}" />`;
   }
 
   _activeIcon() {
-    return this.isSvg ? this.images[1] : `<img src="${this.images[1]}" />`;
+    return this.isSvg
+      ? `<div class="icon-active-animation">${this.images[1]}</div>`
+      : `<img class="icon-active-animation" src="${this.images[1]}" />`;
   }
 
   render() {

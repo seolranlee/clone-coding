@@ -12,26 +12,37 @@ const like = new Icon({
   unique: "like-icon"
 });
 
-
-var object = null
-// var arr = ["./images/img01.jpg"]
-var arr = ["http://ssd.designfever.com/kr/contents/galaxy-s10/video/kv_video.mp4"]
-if(!object) {
-  if(arr.length > 1) object = new ImageSlider({
-    unique: "image-slider",
-    item: arr
-  })
-  else object = new Video({
-    unique: "video",
-    item: arr[0]
-  })
+var object = null;
+var arr = ["./images/img01.jpg", "./images/img02.jpg"];
+// var arr = ["http://ssd.designfever.com/kr/contents/galaxy-s10/video/kv_video.mp4"]
+if (!object) {
+  if (arr.length > 1)
+    object = new ImageSlider({
+      unique: "image-slider",
+      item: arr
+    });
+  else
+    object = new Video({
+      unique: "video",
+      item: arr[0]
+    });
 }
 
+const indicator = new Indicator({
+  count: arr.length
+});
 
+object.onSliderEffect(count => {
+  indicator.moveTo(count);
+});
 
 const root = document.getElementById("root");
 root.innerHTML += like.render();
 root.innerHTML += object.render();
+root.innerHTML += indicator.render();
 
 like.mounted();
 object.mounted();
+indicator.mounted();
+
+// indicator완성.

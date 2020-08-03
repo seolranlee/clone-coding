@@ -1,4 +1,4 @@
-let index = 0;
+import Icon from "./icon.js";
 
 class Feed {
   constructor({
@@ -25,50 +25,21 @@ class Feed {
 
     this.$el = null;
 
-    this.views = null;
-    const arr = ["./images/img01.jpg", "./images/img02.jpg"];
-    // const arr = ["http://ssd.designfever.com/kr/contents/galaxy-s10/video/kv_video.mp4"]
-    if (!this.views) {
-      if (arr.length > 1)
-        this.views = new ImageSlider({
-          item: arr
-        });
-      else {
-        this.views = new Image({
-          item: arr[0]
-        });
-      }
-    }
+    this.$likesEl = null;
 
-    this.like = new Icon({
-      isActive: false,
-      images: [
-        `<svg aria-label="좋아요" class="_8-yf5" fill="#262626" height="24" viewBox="0 0 48 48" width="24"><path d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>`,
-        `<svg aria-label="좋아요 취소" class="_8-yf5 " fill="#ed4956" height="24" viewBox="0 0 48 48" width="24"><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>`
-      ]
-    });
-
-    this.saved = new Icon({
-      isActive: false,
-      images: [
-        `<svg aria-label="저장" class="_8-yf5" fill="#262626" height="24" viewBox="0 0 48 48" width="24"><path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 29 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1zM24 26c.8 0 1.6.3 2.2.9l15.8 16V3H6v39.9l15.8-16c.6-.6 1.4-.9 2.2-.9z"
-        ></path></svg>`,
-        `<svg aria-label="삭제" class="_8-yf5" fill="#262626" height="24" viewBox="0 0 48 48" width="24"><path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 28.9 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1z"></path></svg>`
-      ]
-    });
-
-    
+    this.iconlayer = document.createElement("div");
+    this.icons = {
+      like: new Icon({ defaultActive: false })
+    };
   }
   mounted() {
-    this.views.mounted();
-    this.like.mounted();
-    this.saved.mounted();
+    this.icons.like.mounted();
   }
   render(el) {
     el.innerHTML = `
     <div class="feed">
       <div class="feed__header">
-      <div class="header__account-info">
+        <div class="header__account-info">
           <div class="user__thumb">
             <img
               src="${this.profile.thumb}"
@@ -76,14 +47,49 @@ class Feed {
           </div>
           <a class="user__id" href="">${this.profile.id}</a>
         </div>
+        <div class="header__actions">
+          <button class="more__actions">
+              <svg
+              aria-label="옵션 더 보기"
+              class="_8-yf5 "
+              fill="#262626"
+              height="16"
+              viewBox="0 0 48 48"
+              width="16"
+          >
+              <circle
+              clip-rule="evenodd"
+              cx="8"
+              cy="24"
+              fill-rule="evenodd"
+              r="4.5"
+              ></circle>
+              <circle
+              clip-rule="evenodd"
+              cx="24"
+              cy="24"
+              fill-rule="evenodd"
+              r="4.5"
+              ></circle>
+              <circle
+              clip-rule="evenodd"
+              cx="40"
+              cy="24"
+              fill-rule="evenodd"
+              r="4.5"
+              ></circle>
+          </svg>
+          </button>
+        </div>
       </div>
       <div class="feed__images">
-        ${this.views.render()}
+        <img
+          src="${this.images[0]}"
+        />
       </div>
       <div class="feed__icons">
         <div class="icons__left">
           <button class="icon__like">
-            ${this.like.render()}
           </button>
           <button class="icon__comment">
             <svg
@@ -118,17 +124,32 @@ class Feed {
         </div>
         <div class="icons__right">
           <button class="icon__save">
-            ${this.saved.render()}
+          ${
+            this.isSaved
+              ? `<svg aria-label="삭제" class="_8-yf5 " fill="#262626" height="24" viewBox="0 0 48 48" width="24"><path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 28.9 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1z"></path></svg>`
+              : `<svg
+          aria-label="저장"
+          class="_8-yf5 "
+          fill="#262626"
+          height="24"
+          viewBox="0 0 48 48"
+          width="24"
+        >
+          <path
+            d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 29 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1zM24 26c.8 0 1.6.3 2.2.9l15.8 16V3H6v39.9l15.8-16c.6-.6 1.4-.9 2.2-.9z"
+          ></path>
+        </svg>`
+          }  
           </button>
         </div>
     </div>
-    <div class="feed__likes">
+      <div class="feed__likes">
         <p class="likes__text">좋아요 <em>${this.likes.length}</em>개</p>
       </div>
       <div class="feed__text">
         <p class="text">
           <a href="" class="account__id">${this.profile.id}</a>${this.text}
-       </p>
+        </p>
       </div>
       <div class="feed__view-comments">
         <a href="" class="view-comment__all-comment">댓글 <em>${
@@ -174,12 +195,15 @@ class Feed {
       </div>
     </div>
     `;
+    el.getElementsByClassName("icon__like")[0].append(
+      this.icons.like.render(this.iconlayer)
+    );
     this.$el = el;
     return el;
   }
+  reRender() {}
 }
-
-const responseData = {
+const responseDate = {
   data: [
     {
       profile: {
@@ -187,6 +211,9 @@ const responseData = {
           "https://pbs.twimg.com/profile_images/923057960577675265/ccdSWBm2_400x400.jpg",
         id: "peppoya"
       },
+      images: [
+        "https://pbs.twimg.com/media/EAPAJcFU0AAyPnW?format=jpg&name=large"
+      ],
       likes: [
         {
           thumb:
@@ -211,9 +238,12 @@ const responseData = {
     {
       profile: {
         thumb:
-          "https://pbs.twimg.com/profile_images/928887718444113921/vRxA9ZpZ_400x400.jpg",
+          "https://w.namu.la/s/b6cb44750896d48a9ea06fb4aa51d7d610c3d4f689dcc9654c6474cbeb3ffe460cf2b35c34e7b414504e205ba00af8312a2778ff2caf3ac21bb0fa43f04ae7a41f83a585ae40fa487764b927083b44b14050771375a8a6fbe67b70d33d32ff3f",
         id: "hyejoojoo"
       },
+      images: [
+        "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/94477535_528282574523931_3356580241426050305_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=103&_nc_ohc=ykD17oLs2NEAX9YmJs8&oh=84099ae396e27b276d7ca7125532ccb2&oe=5F3AE5CA"
+      ],
       likes: [
         {
           thumb:
@@ -244,11 +274,10 @@ const responseData = {
     }
   ]
 };
-
 const timeLine = document.getElementById("timeline");
 const feedList = [];
 
-responseData.data.forEach((data, index) => {
+responseDate.data.forEach((data, index) => {
   feedList.push(new Feed(data));
   const element = document.createElement("div");
   feedList[index].render(element);
