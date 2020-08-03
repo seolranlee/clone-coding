@@ -26,13 +26,17 @@ class Feed {
     this.$el = null;
 
     this.views = null;
-    const arr = ["./images/img01.jpg", "./images/img02.jpg"];
+    const arr = ["./images/img01.jpg", "./images/img02.jpg", "./images/img03.jpg"];
     // const arr = ["http://ssd.designfever.com/kr/contents/galaxy-s10/video/kv_video.mp4"]
     if (!this.views) {
-      if (arr.length > 1)
+      if (arr.length > 1) {
         this.views = new ImageSlider({
           item: arr
         });
+        this.dots = new Indicator({
+          count: arr.length
+        });
+      }
       else {
         this.views = new Image({
           item: arr[0]
@@ -61,6 +65,7 @@ class Feed {
   }
   mounted() {
     this.views.mounted();
+    if(this.dots !== undefined) this.dots.mounted();
     this.like.mounted();
     this.saved.mounted();
   }
@@ -116,6 +121,7 @@ class Feed {
             </svg>
           </button>
         </div>
+        ${this.dots ? this.dots.render() : ""}
         <div class="icons__right">
           <button class="icon__save">
             ${this.saved.render()}
@@ -164,13 +170,13 @@ class Feed {
       </div>
       <div class="feed__time"><em>${this.createdAt}</em>시간 전</div>
       <div class="feed__write-comments">
-        <div class="wirte-comment__input">
+        <div class="write-comment__input">
           <input
             type="text"
             placeholder="댓글 달기..."
           />
         </div>
-        <button class="wirte-comment__button">게시</button>
+        <button class="write-comment__button">게시</button>
       </div>
     </div>
     `;

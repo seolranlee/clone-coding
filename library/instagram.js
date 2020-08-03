@@ -291,14 +291,14 @@ class Indicator extends Component {
     const indicatorArr = [];
     for (let i = 0; i < this.count; i++) {
       indicatorArr.push(
-        `<li><span class="indicator-dot" unique-name="${this.unique}-${i}"></span></li>`
+        `<span class="indicator-dot" unique-name="${this.unique}-${i}"></span>`
       );
     }
 
     return `
-    <ul unique-name="${this.unique}">
+    <div class="indicator" unique-name="${this.unique}">
       ${indicatorArr.toString().replace(/,/g, "")}
-    </ul>
+    </div>
     `;
   }
 

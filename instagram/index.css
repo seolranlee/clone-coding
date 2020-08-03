@@ -85,6 +85,7 @@ button {
 }
 /* feed__images */
 .feed__images {
+  position: relative;
   border-top: 1px solid #dfdfdf;
   border-bottom: 1px solid #dfdfdf;
 }
@@ -94,6 +95,7 @@ button {
 
 /* feed__icons */
 .feed__icons {
+  position: relative;
   padding: 0 8px;
   height: 40px;
   font-size: 0;
@@ -103,6 +105,12 @@ button {
   display: inline-block;
   vertical-align: middle;
   width: calc(100% - 40px);
+}
+.indicator{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .icons__left button {
   width: 40px;
@@ -171,17 +179,17 @@ button {
   border-top: 1px solid #dfdfdf;
   font-size: 0;
 }
-.wirte-comment__input {
+.write-comment__input {
   display: inline-block;
   vertical-align: middle;
   width: calc(100% - 10%);
   font-size: 14px;
   line-height: 56px;
 }
-.wirte-comment__input::placeholder {
+.write-comment__input::placeholder {
   color: rgb(38, 38, 38);
 }
-.wirte-comment__button {
+.write-comment__button {
   display: inline-block;
   vertical-align: middle;
   font-size: 14px;
